@@ -1,0 +1,48 @@
+export const projects = [
+  {
+    id: "syntaxlab",
+    name: "SyntaxLab",
+    tagline: "Live DBMS execution for large-scale classrooms.",
+    description:
+      "A full-stack application bridging DBMS theory and live classroom execution, with a randomized team engine and dynamic PostgreSQL bridge.",
+    stack: ["React", "Node.js", "Express", "PostgreSQL"],
+    github: "https://github.com/AbdulRahman1807/SyntaxLab",
+    demo: null,
+    featured: true,
+    placeholder: false,
+  },
+  {
+    id: "buzzcode",
+    name: "BuzzCode",
+    tagline: "Real-time buzzer for contests, quizzes & classrooms.",
+    description:
+      "First-tap-wins buzzer system with host controls, live scoring, and configurable delay. Firebase-powered, no backend needed.",
+    stack: ["HTML", "CSS", "JavaScript", "Firebase"],
+    github: "https://github.com/AbdulRahman1807/buzzcode",
+    demo: "https://abdulrahman1807.github.io/buzzcode/",
+    featured: false,
+    placeholder: false,
+  },
+  {
+    id: "aiml",
+    name: "ML Project",
+    tagline: "Coming soon.",
+    description: "An AI/ML project using scikit-learn. Details to be added.",
+    stack: ["Python", "scikit-learn"],
+    github: null,
+    demo: null,
+    featured: false,
+    placeholder: true,
+  },
+  {
+    id: "project4",
+    name: "Project 4",
+    tagline: "Coming soon.",
+    description: "Details to be added.",
+    stack: [],
+    github: null,
+    demo: null,
+    featured: false,
+    placeholder: true,
+  },
+];
