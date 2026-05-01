@@ -1,4 +1,4 @@
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ArrowDown } from "lucide-react";
 import gsap from "gsap";
 import { useEffect, useMemo, useRef, useState } from "react";
 import WaveSquaresGrid from "./WaveSquaresGrid";
@@ -118,7 +118,7 @@ export default function Hero({ animateIn }) {
           data-cursor="hover"
           onClick={() => play("thunk")}
         >
-          View My Work ↓
+          View My Work <ArrowDown size={18} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
         </a>
         <a
           href="#contact"

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSound } from "../hooks/useSound";
+import { ExternalLink, ArrowRight } from "lucide-react";
 
 export default function ProjectCard({ project }) {
   const { play } = useSound();
@@ -46,7 +47,7 @@ export default function ProjectCard({ project }) {
             data-cursor="hover"
             onClick={() => play("thunk")}
           >
-            GitHub ↗
+            GitHub <ExternalLink size={14} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '2px' }} />
           </a>
         )}
         {project.demo && (
@@ -58,7 +59,7 @@ export default function ProjectCard({ project }) {
             data-cursor="hover"
             onClick={() => play("thunk")}
           >
-            Live Demo ↗
+            Live Demo <ExternalLink size={14} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '2px' }} />
           </a>
         )}
         <Link
@@ -67,7 +68,7 @@ export default function ProjectCard({ project }) {
           data-cursor="hover"
           onClick={() => play("thunk")}
         >
-          View Case Study →
+          View Case Study <ArrowRight size={14} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '2px' }} />
         </Link>
       </div>
     </article>

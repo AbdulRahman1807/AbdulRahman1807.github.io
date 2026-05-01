@@ -7,6 +7,9 @@ import SyntaxLab from "./pages/projects/SyntaxLab.jsx";
 import BuzzCode from "./pages/projects/BuzzCode.jsx";
 import PlaceholderProject from "./pages/projects/PlaceholderProject.jsx";
 import PageTransition from "./components/PageTransition.jsx";
+import CustomCursor from "./components/CustomCursor.jsx";
+import WaveSquaresGrid from "./components/WaveSquaresGrid.jsx";
+import Navbar from "./components/Navbar.jsx";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -67,6 +70,9 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <CustomCursor />
+      <WaveSquaresGrid />
+      <Navbar />
       <AnimatedRoutes />
     </BrowserRouter>
   );

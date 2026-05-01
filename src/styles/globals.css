@@ -375,14 +375,16 @@ a {
 
 @media (max-width: 768px) {
   .hero-word {
-    gap: 0.15rem; /* Better spacing for mobile */
-    justify-content: center;
+    gap: 0.1rem;
+    justify-content: flex-start;
   }
 }
 
 .hero-letter-wrap {
   display: inline-block;
   overflow: hidden;
+  padding: 0 0.05em; /* Prevent letter cutoff */
+  margin: 0 -0.05em;
 }
 
 .hero-letter-inner {
@@ -789,19 +791,33 @@ a {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
-.project-back {
+.project-back-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--accent-primary);
+  text-decoration: none;
+  margin-bottom: 1rem;
   width: fit-content;
 }
 
+.project-back-link:hover {
+  text-decoration: underline;
+}
+
 .project-page-title {
-  font-size: 4rem;
+  font-size: clamp(2.5rem, 10vw, 4rem);
   font-weight: 800;
+  line-height: 1.1;
 }
 
 .project-page-tagline {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 4vw, 1.2rem);
   color: var(--text-secondary);
 }
 
@@ -915,9 +931,9 @@ a {
   }
 
   .hero-title {
-    font-size: clamp(2.2rem, 14vw, 3.8rem); /* Even smaller to avoid cutoff */
-    text-align: center;
-    align-items: center;
+    font-size: clamp(2rem, 15vw, 3.5rem);
+    text-align: left;
+    align-items: flex-start;
   }
 
   .hero-bio {

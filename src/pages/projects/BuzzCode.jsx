@@ -1,5 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useSound } from "../../hooks/useSound";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 
 const stack = ["HTML", "CSS", "JavaScript", "Firebase"];
 
@@ -9,6 +10,15 @@ export default function BuzzCode() {
 
   return (
     <main className="project-page-shell">
+      <Link 
+        to="/" 
+        className="project-back-link font-mono"
+        onClick={() => play("tick")}
+        data-cursor="hover"
+      >
+        <ArrowLeft size={16} /> BACK TO HOME
+      </Link>
+
       <h1 className="font-display project-page-title">BuzzCode</h1>
       <p className="project-page-tagline">
         Real-time buzzer for contests, quizzes & classrooms.
@@ -58,7 +68,7 @@ export default function BuzzCode() {
           className="brutal-btn brutal-btn-outline"
           onClick={() => play("thunk")}
         >
-          View on GitHub ↗
+          View on GitHub <ExternalLink size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
         </a>
         <a
           href="https://abdulrahman1807.github.io/buzzcode/"
@@ -67,7 +77,7 @@ export default function BuzzCode() {
           className="brutal-btn brutal-btn-outline"
           onClick={() => play("thunk")}
         >
-          Live Demo ↗
+          Live Demo <ExternalLink size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
         </a>
       </div>
     </main>
