@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { useEffect, useMemo, useRef, useState } from "react";
 import WaveSquaresGrid from "./WaveSquaresGrid";
 import { useSound } from "../hooks/useSound";
+import VerticalMarquee from "./VerticalMarquee";
 
 const TAGLINE = "building things that just work.";
 
@@ -12,6 +13,7 @@ export default function Hero({ animateIn }) {
   const lastNameChars = useMemo(() => "RAHMAN".split(""), []);
   const heroRef = useRef(null);
   const labelRef = useRef(null);
+  const marqueeContainerRef = useRef(null);
   const [typedText, setTypedText] = useState("");
   const [typingDone, setTypingDone] = useState(false);
   const [startTypewriter, setStartTypewriter] = useState(false);
@@ -32,6 +34,7 @@ export default function Hero({ animateIn }) {
       const letters = heroRef.current?.querySelectorAll(".hero-letter-inner") ?? [];
       gsap.set(letters, { clipPath: "inset(100% 0 0 0)" });
       gsap.set(labelRef.current, { x: -30, opacity: 0 });
+      gsap.set(marqueeContainerRef.current, { x: 50, opacity: 0, rotate: 10 });
 
       gsap.to(letters, {
         clipPath: "inset(0% 0 0 0)",
@@ -48,6 +51,15 @@ export default function Hero({ animateIn }) {
         duration: 0.5,
         ease: "power3.out",
         delay: 0.95,
+      });
+
+      gsap.to(marqueeContainerRef.current, {
+        x: 0,
+        opacity: 1,
+        rotate: 2,
+        duration: 1,
+        ease: "elastic.out(1, 0.75)",
+        delay: 1.2,
       });
     }, heroRef);
 
@@ -130,9 +142,13 @@ export default function Hero({ animateIn }) {
         </a>
       </div>
 
-      <div className="hero-chevron">
-        <ChevronDown size={32} />
+
+      <VerticalMarquee direction="horizontal" />
+
       </div>
+
+      <div className="hero-marquee-wrapper" ref={marqueeContainerRef}>
+        <VerticalMarquee />
       </div>
     </section>
   );
