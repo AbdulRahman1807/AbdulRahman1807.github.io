@@ -1,6 +1,6 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSound } from "../hooks/useSound";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -20,6 +20,28 @@ const getRandomScale = () => (0.98 + Math.random() * 0.04).toFixed(2);
 export default function Skills() {
   const { play } = useSound();
   const sectionRef = useRef(null);
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  // Handle filtering animation
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    
+    const cards = section.querySelectorAll(".skills-card");
+    
+    cards.forEach((card, i) => {
+      const category = Object.keys(skillData)[i];
+      const isActive = activeFilter === "All" || category === activeFilter;
+      
+      gsap.to(card, {
+        opacity: isActive ? 1 : 0.12,
+        scale: isActive ? 1 : 0.92,
+        duration: 0.4,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+    });
+  }, [activeFilter]);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
@@ -31,7 +53,9 @@ export default function Skills() {
       const section = sectionRef.current;
       const header = section?.querySelector(".section-title");
       const cards = section?.querySelectorAll(".skills-card") ?? [];
+      const tags = section?.querySelectorAll(".skills-tag");
 
+      // Initial card entrance
       gsap.fromTo(
         header,
         { clipPath: "inset(0 100% 0 0)", scale: 0.8, filter: "blur(10px)" },
@@ -69,6 +93,35 @@ export default function Skills() {
           },
         },
       );
+
+      // Scramble tags logic
+      gsap.fromTo(tags, 
+        { opacity: 0 },
+        {
+          opacity: 1,
+          stagger: {
+            each: 0.03,
+            onStart: function() {
+              const el = this.targets()[0];
+              const real = el.getAttribute('data-skill');
+              const chars = "XQZJVBK#@!%&*";
+              let frame = 0;
+              const id = setInterval(() => {
+                el.textContent = frame > 8 ? real 
+                  : [...real].map(c => c === " " ? " " : chars[Math.floor(Math.random() * chars.length)]).join("");
+                if (++frame > 9) {
+                  clearInterval(id);
+                }
+              }, 60);
+            }
+          },
+          scrollTrigger: {
+            trigger: section,
+            start: "top 75%",
+            toggleActions: "play none none none"
+          }
+        }
+      );
     }, sectionRef);
 
     return () => {
@@ -86,16 +139,22 @@ export default function Skills() {
         {Object.entries(skillData).map(([category, items], index) => (
           <div
             key={category}
-            className={`brutal-card skills-card variant-${(index % 3) + 1}`}
+            className={`brutal-card skills-card variant-${(index % 3) + 1} ${activeFilter === category ? "is-focused" : ""}`}
             style={{ 
               transform: `rotate(${getRandomRotation()}deg) scale(${getRandomScale()})`,
             }}
+            onClick={() => {
+              play("thunk");
+              setActiveFilter(activeFilter === category ? "All" : category);
+            }}
+            data-cursor="hover"
           >
             <p className="font-mono skills-label">{category}</p>
             <div className="skills-tags">
               {items.map((item) => (
                 <span
                   key={item}
+                  data-skill={item}
                   className="font-mono skills-tag"
                   onMouseEnter={() => play("tick")}
                 >

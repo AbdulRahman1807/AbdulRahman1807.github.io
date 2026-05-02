@@ -53,14 +53,15 @@ export default function Hero({ animateIn }) {
         delay: 0.95,
       });
 
-      gsap.to(marqueeContainerRef.current, {
-        x: 0,
-        opacity: 1,
-        rotate: 2,
-        duration: 1,
-        ease: "elastic.out(1, 0.75)",
-        delay: 1.2,
-      });
+        gsap.to(marqueeContainerRef.current, {
+          x: 0,
+          opacity: 1,
+          rotate: 2,
+          duration: 1,
+          ease: "elastic.out(1, 0.75)",
+          delay: 1.2,
+          onStart: () => play("swoosh"),
+        });
     }, heroRef);
 
     return () => ctx.revert();
@@ -76,16 +77,37 @@ export default function Hero({ animateIn }) {
     }
 
     let index = 0;
-    const timer = setInterval(() => {
-      index += 1;
-      setTypedText(TAGLINE.slice(0, index));
-      if (index >= TAGLINE.length) {
-        clearInterval(timer);
-        setTypingDone(true);
-      }
-    }, 40);
+    let isDeleting = false;
+    let timeoutId;
 
-    return () => clearInterval(timer);
+    const tick = () => {
+      if (!isDeleting) {
+        index += 1;
+        setTypedText(TAGLINE.slice(0, index));
+        if (index >= TAGLINE.length) {
+          setTypingDone(true);
+          isDeleting = true;
+          timeoutId = setTimeout(tick, 3000); // Wait longer when done
+          return;
+        }
+      } else {
+        index -= 1;
+        setTypedText(TAGLINE.slice(0, index));
+        if (index <= 0) {
+          setTypingDone(false);
+          isDeleting = false;
+          timeoutId = setTimeout(tick, 800); // Wait a bit before restarting
+          return;
+        }
+      }
+      
+      const speed = isDeleting ? 30 : 50;
+      timeoutId = setTimeout(tick, speed);
+    };
+
+    tick();
+
+    return () => clearTimeout(timeoutId);
   }, [startTypewriter]);
 
   return (

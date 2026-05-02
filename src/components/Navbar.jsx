@@ -176,6 +176,7 @@ export default function Navbar({ animateIn }) {
               rel="noopener noreferrer"
               className="dot-nav-item font-mono"
               data-cursor="hover"
+              onClick={() => play("chime")}
             >
               <span className="control-label">DOWNLOAD CV</span>
               <Link size={16} />

@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { useSound } from '../hooks/useSound';
 
 const VerticalMarquee = ({ direction = "vertical" }) => {
+  const { play } = useSound();
   const bannerRef = useRef(null);
   const phrases = [
     "LEGOS",
@@ -41,7 +43,11 @@ const VerticalMarquee = ({ direction = "vertical" }) => {
   }, [direction, phrases.length]);
 
   return (
-    <div className={`${direction}-marquee-container`} data-cursor="banner">
+    <div 
+      className={`${direction}-marquee-container`} 
+      data-cursor="banner"
+      onMouseEnter={() => play("whoosh")}
+    >
       <div className={`${direction}-marquee-inner`} ref={bannerRef}>
         {repeatedPhrases.map((phrase, i) => (
           <div key={i} className="marquee-item">

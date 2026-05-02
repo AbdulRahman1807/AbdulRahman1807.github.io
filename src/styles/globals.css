@@ -380,7 +380,7 @@ a {
 
 @media (max-width: 480px) {
   .hero-title {
-    font-size: clamp(2.5rem, 15vw, 4rem);
+    font-size: clamp(2.5rem, 13vw, 4rem);
   }
 }
 
@@ -475,6 +475,13 @@ a {
   position: relative;
 }
 
+@media (max-width: 768px) {
+  .skills-card {
+    min-height: auto;
+    padding: 1.5rem;
+  }
+}
+
 .variant-1 { flex-basis: 360px; }
 .variant-2 { flex-basis: 340px; }
 .variant-3 { flex-basis: 350px; }
@@ -493,27 +500,49 @@ a {
 }
 
 .skills-tag {
+  position: relative;
+  overflow: hidden;
   display: inline-block;
-  padding: 0.4rem 0.8rem;
+  padding: 6px 14px;
   background: var(--bg-tertiary);
   border: 1px solid var(--border);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-primary);
-  transition: all 0.2s ease;
+  transition: color 0.2s, transform 0.2s ease;
+  z-index: 1;
 }
 
-.skills-tag:hover {
+.skills-tag::after {
+  content: "";
+  position: absolute; 
+  inset: 0;
   background: var(--accent-primary);
-  color: #fff;
-  transform: translateY(-3px);
+  transform: translateX(-101%);
+  transition: transform 0.25s ease;
+  z-index: -1;
+}
+
+.skills-card:hover .skills-tag::after {
+  transform: translateX(0);
+}
+
+.skills-card:hover .skills-tag { 
+  color: #000; 
   border-color: var(--accent-primary);
 }
 
-.skills-tag {
-  border: 1px solid var(--border);
-  padding: 4px 12px;
-  border-radius: 0;
-  font-size: 0.8rem;
+.skills-tag:nth-child(1)::after { transition-delay: 0ms; }
+.skills-tag:nth-child(2)::after { transition-delay: 40ms; }
+.skills-tag:nth-child(3)::after { transition-delay: 80ms; }
+.skills-tag:nth-child(4)::after { transition-delay: 120ms; }
+.skills-tag:nth-child(5)::after { transition-delay: 160ms; }
+.skills-tag:nth-child(6)::after { transition-delay: 200ms; }
+
+.skills-card.is-focused {
+  border-color: var(--accent-primary);
+  box-shadow: 12px 12px 0 var(--accent-primary);
+  z-index: 10;
+  transform: scale(1.05) rotate(0deg) !important;
 }
 
 .projects-grid {
@@ -1141,4 +1170,53 @@ a {
 .marquee-overlay-right {
   right: 0;
   background: linear-gradient(to left, var(--bg-secondary) 0%, transparent 100%);
+}
+
+/* Decorative Design Elements */
+.skills-section {
+  position: relative;
+  overflow: visible;
+}
+
+.skills-ornament {
+  position: absolute;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  color: var(--accent-primary);
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+  line-height: 1;
+  user-select: none;
+}
+
+.ornament-1 { top: 10%; left: -5%; font-size: 20rem; transform: rotate(-15deg); }
+.ornament-2 { bottom: 5%; right: -2%; font-size: 15rem; transform: rotate(10deg); }
+
+.brutal-sticker {
+  position: absolute;
+  padding: 0.5rem 1rem;
+  background: var(--accent-amber);
+  color: #000;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 800;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  border: 2px solid #000;
+  box-shadow: 3px 3px 0 #000;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.sticker-top-right { top: -15px; right: -15px; transform: rotate(5deg); }
+.sticker-bottom-left { bottom: -15px; left: -15px; transform: rotate(-8deg); }
+
+.skills-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.03;
+  pointer-events: none;
 }
