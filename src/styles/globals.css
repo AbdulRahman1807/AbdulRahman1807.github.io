@@ -156,9 +156,22 @@ a {
 }
 
 .ticker-logo {
-  font-size: 1.5rem;
-  color: var(--accent-primary);
-  margin-bottom: auto;
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: auto;
+    overflow: hidden;
+}
+
+.ticker-logo-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .ticker-links {

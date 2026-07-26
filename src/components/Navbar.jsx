@@ -84,7 +84,9 @@ export default function Navbar({ animateIn }) {
   return (
     <>
       <aside className="side-ticker">
-        <div className="ticker-logo font-display">AR</div>
+        <div className="ticker-logo">
+          <img src="/AR.png" alt="AR Logo" className="ticker-logo-img" />
+        </div>
         <div className="ticker-links">
           {isProjectPage ? (
             <button 
