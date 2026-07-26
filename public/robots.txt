@@ -1,0 +1,5 @@
+User-agent: *
+
+Allow: /
+
+Sitemap: https://abdulrahman1807.github.io/sitemap.xml
