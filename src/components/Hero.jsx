@@ -81,7 +81,7 @@ export default function Hero({ animateIn }) {
     }, heroRef);
 
     return () => ctx.revert();
-  }, [animateIn, play]);
+  }, [animateIn]);
 
   useEffect(() => {
     if (!startTypewriter) return;
@@ -133,7 +133,7 @@ export default function Hero({ animateIn }) {
 
   return (
     <section
-      id="home"
+      id="about"
       className="hero-section"
       ref={heroRef}
       aria-labelledby="hero-heading"
@@ -231,7 +231,6 @@ export default function Hero({ animateIn }) {
             Get In Touch
           </a>
         </div>
-
         <VerticalMarquee direction="horizontal" />
       </div>
 
